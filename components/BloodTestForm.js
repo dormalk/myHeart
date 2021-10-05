@@ -1,17 +1,20 @@
 import React,{useState} from 'react';
 import {StyleSheet,TextInput,View,Text} from 'react-native';
+import AutoSuggest from './AutoSuggest';
 
 
 const BloodTestForm  = ({onSubmit,suggest}) => {
-
     const [testName, setTestName] = useState('');
     const [result, setResult] = useState('');
-    
 
-    const onChangeResult = (result) => {
-        if(result != '' && result.match(/^[0-9]+$/) == null) return;
-        const num = parseInt(result)
-        setResult(num)
+    const onChangeResult = (newResult) => {
+        if(newResult != '' && newResult.match(/^[0-9]+$/) == null) return;
+        setResult(newResult)
+    }
+
+    const handleClickSuggest = () => {
+        setTestName(suggest);
+        onSubmit({testName:suggest, result})
     }
 
     return <View style={styles.containerStyle}>
@@ -20,9 +23,8 @@ const BloodTestForm  = ({onSubmit,suggest}) => {
                     onChangeText={setTestName}
                     style={styles.inputStyle}
                     onBlur={() => onSubmit({testName,result})}/>
-        {suggest && <Text style={{alignSelf:'center'}}>Did you mean 
-                    <Text style={{fontWeight: 'bold'}}> {suggest}</Text> ?
-                    </Text>}
+        {suggest && <AutoSuggest    suggest={suggest}
+                                    onClick={handleClickSuggest}/>}
         <TextInput  placeholder="Result"
                     value={result}
                     keyboardType={'numeric'}

@@ -1,12 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useEffect,useState} from 'react';
 import { SplashScreen, TestResultScreen } from './screens';
 
 export default function App() {
+  const [showSplash,setShowSplash] = useState(true)
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSplash(false)
+    },2500)
+  }, [])
+
   return (
     <>
-      <TestResultScreen/>
+      {showSplash ? <SplashScreen/> : <TestResultScreen/>}
       <StatusBar style="auto" />
     </>
   );
