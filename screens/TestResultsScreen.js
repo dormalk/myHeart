@@ -1,9 +1,7 @@
 import React from 'react';
 import {StyleSheet,Text,StatusBar,View} from 'react-native'
 import {BloodTestForm, BloodTestResult} from '../components';
-import { useBloodTest } from '../shared/hooks/bloodTest-hook';
-import SplashScreen from './SplashScreen';
-
+import { useBloodTest } from '../shared/hooks/bloodtest-hook';
 
 const TestResultScreen = () => {
     const [state,setUserInput] = useBloodTest(null)

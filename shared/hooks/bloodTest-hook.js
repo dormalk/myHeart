@@ -1,6 +1,6 @@
 import { useReducer,useEffect,useCallback } from "react";
 import axios from 'axios';
-import {findMatchString} from '../helpers/levenshtein';
+import {findMatchString} from '../helpers/match-strings';
 
 const SET_TEST_STATUS = 'SET_TEST_STATUS' 
 const SET_AUTO_SUGGEST = 'SET_AUTO_SUGGEST' 
@@ -17,7 +17,7 @@ const bloodTestReducer = (state, action) => {
         case SET_AUTO_SUGGEST: 
             return {
                 ...state,
-                testStatus: null,
+                testStatus: 'unknown',
                 autoSuggest: action.payload
             }
         case SET_BLOOD_TESTS:
