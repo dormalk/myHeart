@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {StyleSheet,TextInput,View} from 'react-native';
-import AutoSuggest from './AutoSuggest';
+import AutoSuggest from './AutoSuggest.js';
 
 
 const BloodTestForm  = ({onSubmit,suggest}) => {
