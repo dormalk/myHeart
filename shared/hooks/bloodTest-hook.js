@@ -17,7 +17,7 @@ const bloodTestReducer = (state, action) => {
         case SET_AUTO_SUGGEST: 
             return {
                 ...state,
-                testStatus: 'unknown',
+                testStatus: action.payload == null ? null : 'unknown',
                 autoSuggest: action.payload
             }
         case SET_BLOOD_TESTS:
@@ -44,19 +44,22 @@ export const useBloodTest = (initialBloodTests) => {
         const match = findMatchString(bloodTests.map((test) => test.name), testName);
         const numResult = parseInt(result);
         if(testName){
+            //if match is equal to user test name input
             if(match && testName.toLowerCase() === match.toLowerCase()) {
+                //if user set result
                 if(!Number.isNaN(numResult) && numResult != 0 ){
+                    // check the trashold and update the status
                     const testInfo = bloodTests.find((test) => test.name.toLowerCase() == testName.toLowerCase())
                     dispatch({type: SET_TEST_STATUS, payload: testInfo.threshold >= numResult ? 'Good' : 'Bad'})
-                } else {
+                } else { // if there is no result but there is a match with test name, clear auto suggestion
                     dispatch({type:SET_AUTO_SUGGEST, payload: null})
                 }
-            } else if(match){
+            } else if(match){ //if the match not equel user test name input - update auto suggestion with natch
                 dispatch({type:SET_AUTO_SUGGEST, payload: match})
-            } else {
+            } else { //otherwise - update unknown status
                 dispatch({type:SET_TEST_STATUS, payload: 'unknown'})
             }
-        } else {
+        } else { // if there is no user test name input - clear auto suggestion
             dispatch({type:SET_AUTO_SUGGEST, payload: null})
         }
     },[bloodTests])
