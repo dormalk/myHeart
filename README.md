@@ -6,8 +6,8 @@
 <h1 align="center">Heart Me</h1>
 
 <p>
-Project developed on Windows 10 <br/>
-Project tested on Windows 10 & Ubunto 20 (Linux OS)<br/>
+Developed on Windows 10 <br/>
+Tested on Windows 10 & Ubunto 20 (Linux OS)<br/>
 Node Js version: v16.10.0<br/>
 Expo version: v4.12.1<br/>
   <b>
